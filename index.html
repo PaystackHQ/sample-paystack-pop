@@ -47,7 +47,7 @@ function payWithPaystack(e) {
       alert('Window closed.');
     },
     callback: function(response){
-      window.location = "verify.php";
+      window.location = "verify.php?reference=" + response.reference;
     }
   };
   
