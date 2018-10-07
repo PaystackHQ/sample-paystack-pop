@@ -7,18 +7,16 @@
 
 require 'vendor/autoload.php';
 
-$paystack = new Yabacon\Paystack('sk_test_6e618e981cd81972adc46c2dad0fd319ff7f16f4');
+$paystack = new Yabacon\Paystack('SECRET_KEY');
 // the code below throws an exception if there was a problem completing the request, 
 // else returns an object created from the json response
-$trx = $paystack->transaction->verify(
-	[
-	 'reference'=>$_GET['reference']
-	]
-);
+$trx = $paystack->transaction->verify([
+  'reference'=>$_GET['reference']
+]);
 
 // status should be true if there was a successful call
 if(!$trx->status){
-    exit($trx->message);
+  exit($trx->message);
 }
 // full sample verify response is here: https://developers.paystack.co/docs/verifying-transactions
 if('success' == $trx->data->status){
@@ -39,7 +37,7 @@ function perform_success(){
   echo json_encode(['verified'=>true]);
   // standard
   header('Location: /success.php');
-	exit();
+  exit();
 }
 
 
