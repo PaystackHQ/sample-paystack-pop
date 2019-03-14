@@ -1,6 +1,6 @@
 <html>
 <head>
-    <script src="https://js.paystack.co/v2/popup.js"></script>
+    <script src="https://js.paystack.co/v2/inline.js"></script>
     <script src="app.js"></script>
 </head>
 <body>
@@ -35,8 +35,8 @@ paymentForm.addEventListener("submit", payWithPaystack, false);
 
 function payWithPaystack(e) {
   e.preventDefault();
-  var config = {
-    key: 'PUBLIC_KEY', // Replace with your public key
+  var handler = PaystackPop.setup({
+    key: PUBLIC_KEY, // Replace with your public key
     email: document.getElementById("email-address").value,
     amount: document.getElementById("amount").value * 100,
     firstname: document.getElementById("first-name").value,
@@ -49,10 +49,9 @@ function payWithPaystack(e) {
     callback: function(response){
       window.location = "verify.php?reference=" + response.reference;
     }
-  };
+  });
   
-  var paystackPopup = new Popup(config);
-  paystackPopup.open();
+  handler.openIframe();
 }
     
 </script>
